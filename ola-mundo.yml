@@ -1,0 +1,18 @@
+name: Meu primeiro workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ola:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exibir mensagem de boas-vindas
+        run: echo "Olá, GitHub Actions!"
+
+      - name: Mostrar data e hora
+        run: date
+
+      - name: Mostrar informações do sistema
+        run: uname -a
