@@ -1,0 +1,35 @@
+name: Dois jobs em sequência
+
+on:
+  push:
+    branches: [main]
+
+env:
+  MEU_NOME: "Matheus"
+  VERSAO: "1.0.0"
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exibir variáveis globais
+        run: |
+          echo "Nome: $MEU_NOME"
+          echo "Versão: $VERSAO"
+
+      - name: Simular uma build
+        run: |
+          echo "Iniciando build da versão $VERSAO..."
+          sleep 2
+          echo "Build concluída!"
+
+
+  verificar:
+    needs: preparar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirmar que preparar terminou
+        run: echo "O job 'preparar' terminou com sucesso, agora posso rodar!"
+
+      - name: Exibir data de deploy
+        run: echo "Deploy simulado em $(date '+%d/%m/%Y às %H:%M')"
